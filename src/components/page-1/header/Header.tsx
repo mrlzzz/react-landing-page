@@ -104,30 +104,30 @@ const logo = (
 const Header = () => {
   return (
     <>
-      <div className="flex h-24 flex-col items-center justify-center p-2   text-primary lg:h-32">
-        <div className="flex w-[95%] items-center justify-between  md:w-[90%] lg:w-[70%]">
+      <div className="flex h-24 flex-col items-center justify-center p-2 text-primary lg:h-32">
+        <div className="flex w-[100%] items-center justify-between  md:w-[90%] lg:w-[70%]">
           <div className="flex items-center ">
             <div>{logo}</div>
             <div className="ml-3 rounded border border-cyan-900 px-1.5 text-xs text-cyan-400">
               Beta
             </div>
           </div>
-          <nav className="flex items-center gap-2 text-sm ">
-            <div className="flex gap-2">
-              <a className="cursor-pointer rounded-md bg-black px-2 py-1  hover:bg-[#1a1a1a] hover:brightness-110">
+          <nav className="flex items-center text-sm md:gap-2 ">
+            <div className="flex md:gap-2">
+              <a className="cursor-pointer rounded-md px-1 py-1 hover:bg-[#1a1a1a]  hover:brightness-110 md:px-2">
                 Docs
               </a>
-              <a className="cursor-pointer rounded-md bg-black px-2 py-1  hover:bg-[#1a1a1a] hover:brightness-110">
+              <a className="cursor-pointer rounded-md px-1 py-1 hover:bg-[#1a1a1a]  hover:brightness-110 md:px-2">
                 Examples
               </a>
             </div>
-            <span className="mx-2 h-4 w-[0.5px] bg-[#1a1a1a]"></span>
-            <div className="inline-flex gap-2">
-              <a className=" cursor-pointer rounded-md bg-black p-1  hover:bg-[#1a1a1a] hover:brightness-110">
+            <span className="mx-2 hidden h-4 w-[0.5px] bg-[#1a1a1a] md:inline"></span>
+            <div className="inline-flex md:gap-2">
+              <a className=" cursor-pointer rounded-md  p-1  hover:bg-[#1a1a1a] hover:brightness-110">
                 {github}
               </a>
 
-              <a className="cursor-pointer rounded-md bg-black p-1 hover:bg-[#1a1a1a] hover:brightness-110">
+              <a className="cursor-pointer rounded-md p-1 hover:bg-[#1a1a1a] hover:brightness-110">
                 {discord}
               </a>
             </div>
