@@ -1,12 +1,14 @@
-import LandingPage from "./components/LandingPage";
+import Page from "./components/Page";
 import "./App.css";
 
 function App() {
-    return (
-        <>
-            <LandingPage></LandingPage>
-        </>
-    );
+  return (
+    <>
+      <div className=" bg-custom h-screen w-screen bg-black">
+        <Page></Page>
+      </div>
+    </>
+  );
 }
 
 export default App;
