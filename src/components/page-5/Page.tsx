@@ -2,10 +2,10 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import Content from "./content/Content";
 
-const Page = () => {
+const PageTwo = () => {
   return (
     <>
-      <div className="bg-custom flex h-screen flex-col font-inter selection:bg-cyan-800/80 selection:text-cyan-50">
+      <div className="flex h-screen flex-col">
         <Header></Header>
         <Content></Content>
         <Footer></Footer>
@@ -14,4 +14,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default PageTwo;
