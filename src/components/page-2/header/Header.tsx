@@ -1,73 +1,226 @@
-const github = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-  >
-    <path
-      d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-      fill="currentColor"
-    ></path>
-  </svg>
-);
-
-const discord = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 127.14 96.36"
-    width="20"
-    height="20"
-  >
-    <g>
-      <g id="Discord_Logos" data-name="Discord Logos">
-        <g
-          id="Discord_Logo_-_Large_-_White"
-          data-name="Discord Logo - Large - White"
-        >
-          <path
-            fill="currentColor"
-            d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"
-          ></path>
-        </g>
-      </g>
-    </g>
-  </svg>
-);
+import { useEffect, useState } from "react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import logo from "../assets/logo.png";
 
 const Header = () => {
+  const [toggleMenu, setToggleMenu] = useState(false);
+  const [activeMenuItem, setActiveMenuItem] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [parent] = useAutoAnimate();
+  const handleMenuButtonClick = (): void => {
+    setToggleMenu(!toggleMenu);
+  };
+  const handleActiveMenuClick = (id: number): void => {
+    setActiveMenuItem(id);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      window.scrollY > 90 ? setIsScrolling(true) : setIsScrolling(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const burgerButton = (
+    <button type="button" onClick={handleMenuButtonClick}>
+      <span className="block h-6 w-6">
+        {/* if toggle add: rotate-45 !w-7 */}
+        <span
+          className={`relative mb-1.5 block h-1 w-full origin-left bg-black duration-200 ${
+            toggleMenu ? "!w-7 rotate-45" : null
+          }`}
+        ></span>
+        {/* if toggle add: !w-0 */}
+        <span
+          className={`mb-1.5 block h-1 w-full bg-black duration-200 ${
+            toggleMenu ? "!w-0" : null
+          }`}
+        ></span>
+        {/* if toggle add: -rotate-45 !w-7 */}
+        <span
+          className={`block h-1 w-full origin-left bg-black duration-200 ${
+            toggleMenu ? "!w-7 -rotate-45" : null
+          }`}
+        ></span>{" "}
+      </span>
+    </button>
+  );
+
+  const pathData = toggleMenu
+    ? "M18 6 6 18 M6 6 18 18"
+    : "M4 6h16M4 12h16M4 18h16";
+
   return (
     <>
-      <div className="flex h-24 flex-col items-center justify-center p-2   text-primary lg:h-32">
-        <div className="flex w-[95%] items-center justify-between  md:w-[90%] lg:w-[70%]">
-          <div className="flex items-center ">
-            <div>HEADER</div>
-            <div className="ml-3 rounded border border-violet-900 px-1.5 text-xs text-violet-400">
-              Beta
+      <header
+        className="fixed top-0 z-20 w-full"
+        onScroll={(e) => {
+          console.log(e);
+        }}
+      >
+        <div ref={parent} className="relative  shadow-md">
+          <div
+            className={`flex items-center justify-between px-7 py-2 transition-all duration-500 ${
+              isScrolling
+                ? "bg-[#f8f4eb]/100 md:py-[34px]"
+                : "bg-[#f8f4eb]/50 md:py-[52px]"
+            } lg:justify-center xl:px-40`}
+          >
+            <nav className="hidden w-full justify-evenly text-xl font-bold lg:flex">
+              {burgerButton}
+              <div
+                onClick={() => {
+                  handleActiveMenuClick(1);
+                }}
+                className={`cursor-pointer  ${
+                  activeMenuItem === 1 ? "text-[#cc1d1d]" : null
+                } bg-inherit transition-all duration-300 `}
+              >
+                <a>About us</a>
+              </div>
+              <div
+                onClick={() => {
+                  handleActiveMenuClick(2);
+                }}
+                className={`cursor-pointer  ${
+                  activeMenuItem === 2 ? "text-[#cc1d1d]" : null
+                } bg-inherit transition-all duration-300 `}
+              >
+                <a>Products</a>
+              </div>
+              <div
+                onClick={() => {
+                  handleActiveMenuClick(3);
+                }}
+                className={`cursor-pointer  ${
+                  activeMenuItem === 3 ? "text-[#cc1d1d]" : null
+                } bg-inherit transition-all duration-300 `}
+              >
+                <a>News</a>
+              </div>
+            </nav>
+            <a className="relative top-0 mt-2 w-fit md:absolute" href="">
+              <img
+                className={`max-h-[80px] w-auto object-contain transition-all duration-300 ${
+                  isScrolling ? "md:max-h-[100px]" : "md:max-h-[158px]"
+                }`}
+                src={logo}
+                width="184"
+                height="156"
+              ></img>
+            </a>
+            <div className="flex w-full justify-end">
+              <button
+                type="button"
+                onClick={handleMenuButtonClick}
+                className="select-none rounded-full p-2 lg:hidden"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="transition-all duration-500 ease-in-out"
+                >
+                  <path d={pathData} />
+                </svg>
+              </button>
             </div>
+            <nav className="hidden w-full justify-evenly font-bold lg:flex">
+              <div
+                onClick={() => {
+                  handleActiveMenuClick(4);
+                }}
+                className={`cursor-pointer  ${
+                  activeMenuItem === 4 ? "text-[#cc1d1d]" : null
+                } bg-inherit transition-all duration-300 `}
+              >
+                <a>30th Anniversary</a>
+              </div>
+              <div
+                onClick={() => {
+                  handleActiveMenuClick(5);
+                }}
+                className={`cursor-pointer  ${
+                  activeMenuItem === 5 ? "text-[#cc1d1d]" : null
+                } bg-inherit transition-all duration-300 `}
+              >
+                <a>Contact</a>
+              </div>
+            </nav>
           </div>
-          <nav className="flex items-center gap-2 text-sm ">
-            <div className="flex gap-2">
-              <a className="cursor-pointer rounded-md bg-black px-2 py-1  hover:bg-[#1a1a1a] hover:brightness-110">
-                THIS
-              </a>
-              <a className="cursor-pointer rounded-md bg-black px-2 py-1  hover:bg-[#1a1a1a] hover:brightness-110">
-                THAT
-              </a>
+          {toggleMenu ? (
+            <div
+              className={`bg flex flex-col text-right font-bold duration-500 lg:hidden ${
+                isScrolling ? "bg-[#f8f4eb]/100" : "bg-[#f8f4eb]/50"
+              }`}
+            >
+              <div className="py-10">
+                <div
+                  onClick={() => {
+                    handleActiveMenuClick(1);
+                  }}
+                  className={`cursor-pointer px-8 py-2 ${
+                    activeMenuItem === 1 ? "text-[#cc1d1d]" : null
+                  } bg-inherit transition-all duration-300 hover:bg-white/50 active:bg-white/25`}
+                >
+                  <a>About us</a>
+                </div>
+                <div
+                  onClick={() => {
+                    handleActiveMenuClick(2);
+                  }}
+                  className={`cursor-pointer px-8 py-2 ${
+                    activeMenuItem === 2 ? "text-[#cc1d1d]" : null
+                  } bg-inherit transition-all duration-300 hover:bg-white/50 active:bg-white/25`}
+                >
+                  <a>Products</a>
+                </div>
+                <div
+                  onClick={() => {
+                    handleActiveMenuClick(3);
+                  }}
+                  className={`cursor-pointer px-8 py-2 ${
+                    activeMenuItem === 3 ? "text-[#cc1d1d]" : null
+                  } bg-inherit transition-all duration-300 hover:bg-white/50 active:bg-white/25`}
+                >
+                  <a>News</a>
+                </div>
+              </div>
+              <div className="border-t border-black py-8 text-sm">
+                <div
+                  onClick={() => {
+                    handleActiveMenuClick(4);
+                  }}
+                  className={`cursor-pointer px-8 py-2 ${
+                    activeMenuItem === 4 ? "text-[#cc1d1d]" : null
+                  } bg-inherit transition-all duration-300 hover:bg-white/50 active:bg-white/25`}
+                >
+                  <a>30th Anniversary</a>
+                </div>
+                <div
+                  onClick={() => {
+                    handleActiveMenuClick(5);
+                  }}
+                  className={`cursor-pointer px-8 py-2 ${
+                    activeMenuItem === 5 ? "text-[#cc1d1d]" : null
+                  } bg-inherit transition-all duration-300 hover:bg-white/50 active:bg-white/25`}
+                >
+                  <a>Contact</a>
+                </div>
+              </div>
             </div>
-            <span className="mx-2 h-4 w-[0.5px] bg-[#1a1a1a]"></span>
-            <div className="inline-flex gap-2">
-              <a className=" cursor-pointer rounded-md bg-black p-1  hover:bg-[#1a1a1a] hover:brightness-110">
-                {github}
-              </a>
-
-              <a className="cursor-pointer rounded-md bg-black p-1 hover:bg-[#1a1a1a] hover:brightness-110">
-                {discord}
-              </a>
-            </div>
-          </nav>
+          ) : null}
         </div>
-      </div>
+      </header>
     </>
   );
 };

@@ -12,6 +12,19 @@ export default {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
       },
+      animation: {
+        marquee: `marquee 30s linear infinite`,
+      },
+      keyframes: {
+        marquee: {
+          from: {
+            backgroundPosition: "0 bottom",
+          },
+          to: {
+            backgroundPosition: "100% bottom",
+          },
+        },
+      },
     },
   },
   plugins: [typography],
