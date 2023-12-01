@@ -24,31 +24,6 @@ const Header = () => {
     };
   }, []);
 
-  const burgerButton = (
-    <button type="button" onClick={handleMenuButtonClick}>
-      <span className="block h-6 w-6">
-        {/* if toggle add: rotate-45 !w-7 */}
-        <span
-          className={`relative mb-1.5 block h-1 w-full origin-left bg-black duration-200 ${
-            toggleMenu ? "!w-7 rotate-45" : null
-          }`}
-        ></span>
-        {/* if toggle add: !w-0 */}
-        <span
-          className={`mb-1.5 block h-1 w-full bg-black duration-200 ${
-            toggleMenu ? "!w-0" : null
-          }`}
-        ></span>
-        {/* if toggle add: -rotate-45 !w-7 */}
-        <span
-          className={`block h-1 w-full origin-left bg-black duration-200 ${
-            toggleMenu ? "!w-7 -rotate-45" : null
-          }`}
-        ></span>{" "}
-      </span>
-    </button>
-  );
-
   const pathData = toggleMenu
     ? "M18 6 6 18 M6 6 18 18"
     : "M4 6h16M4 12h16M4 18h16";
@@ -70,7 +45,6 @@ const Header = () => {
             } lg:justify-center xl:px-40`}
           >
             <nav className="hidden w-full justify-evenly text-xl font-bold lg:flex">
-              {burgerButton}
               <div
                 onClick={() => {
                   handleActiveMenuClick(1);
