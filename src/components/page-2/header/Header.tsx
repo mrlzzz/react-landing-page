@@ -76,7 +76,7 @@ const Header = () => {
                 <a>News</a>
               </div>
             </nav>
-            <a className="relative top-0 mt-2 w-fit md:absolute" href="">
+            <a className="relative top-0 mt-2 w-fit md:absolute" href="#">
               <img
                 className={`max-h-[80px] w-auto object-contain transition-all duration-300 ${
                   isScrolling ? "md:max-h-[100px]" : "md:max-h-[158px]"
