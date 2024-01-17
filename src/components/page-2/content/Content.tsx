@@ -59,6 +59,8 @@ const svg4 = (
 );
 
 const Content = (): React.JSX.Element => {
+  let s = "string";
+
   return (
     <>
       <main>
@@ -84,7 +86,7 @@ const Content = (): React.JSX.Element => {
           </div>
         </div>
         <div className="relative h-screen overflow-hidden bg-[#d3d23c] text-4xl font-bold text-white">
-          <div className="mt-16 flex h-[60%] flex-col items-center justify-center gap-6 lg:mt-0 lg:flex-row">
+          <div className="mt-24 flex h-[60%] flex-col items-center justify-center gap-6 lg:mt-0 lg:flex-row">
             <div className="mx-4 min-w-[300px] max-w-[500px] border-[10px] border-white/90 shadow-md lg:ml-10 lg:-rotate-3">
               <img className="" src={citrus}></img>
             </div>
@@ -103,7 +105,7 @@ const Content = (): React.JSX.Element => {
           </div>
         </div>
         <div className="relative h-screen overflow-hidden bg-[#f0f1d1] text-4xl font-bold text-white">
-          <div className="mt-16 flex h-[60%] flex-col items-center justify-center gap-6 lg:mt-0 lg:flex-row">
+          <div className="mt-24 flex h-[60%] flex-col items-center justify-center gap-6 lg:mt-0 lg:flex-row">
             <div className="mx-4 mb-10 max-w-[500px]  text-xl text-[#413528]/80 sm:mt-4 sm:text-2xl">
               <h2 className="mb-6 text-2xl  text-[#413528] sm:text-4xl ">
                 Crazy title!
